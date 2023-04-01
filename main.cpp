@@ -3,7 +3,8 @@
 
 
 
-#include <math.h>
+
+
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
@@ -92,21 +93,60 @@ void registration(){
     }
     }
 
-    }
 }
+//Password Check
+while(true){
+    std::cout << "Enter Password" << endl;
+    getline(cin,newPassword);
+    std::cout << "Confirmm Password" << endl;
+    getline(cin,checkPassword);
+    verif = newPassword.length();
+
+    if(verif < 5){
+        std::cout << "\nWeak Password";
+    }
+    else if(checkPassword == newPassword){
+        fstream users;
+        users.open("Users.txt",ios::app);
+        if(users.is_open()){
+            users << newUsername +" "+ newPassword << endl;
+            users.close();
+        }
+        cout << "\n===================================\n";
+        cout << "\nSuccessfully new account created! \n \n";
+        cout << "===================================\n";
+        break;}
+    else{
+        cout << "\nPassword confirmation not correct! \n" << endl;
+
+        }
+        }
+    login();
+}
+
 int main(){
 
-    login();
+    string decision;
 
 
+    std::cout << " 'login' For login" << endl;
+    std::cout << " 'register'  For register" << endl;
 
 
+    while(true){
+        getline(cin,decision);
 
-
-
-
-
-
-
+        if(decision == "login"){
+            login();
+            break;
+        }
+        else if(decision == "register"){
+            registration();
+            break;
+        }
+        else{
+            std::cout << "ENTER VALID INPUT" << endl;
+        }
+    }
 return 0; 
 }
